@@ -36,8 +36,8 @@
   .nav-links.active {
     left: 0;
     width: 250px; /* or any desired width */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(90px);
+    -webkit-backdrop-filter: blur(90px);
     background: rgba(255, 255, 255, 0.2); /* Slightly more opaque when active */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   }
