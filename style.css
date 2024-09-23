@@ -33,6 +33,26 @@ body.dark-theme {
     padding: 0 20px;
 }
 
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 1002;
+  }
+  
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-light);
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  body.dark-theme .hamburger div {
+    background-color: var(--text-dark);
+  }
+
+
 /* Glassy Nav */
 .glassy-nav {
     position: fixed;
@@ -77,6 +97,29 @@ nav ul li a {
 nav ul li a:hover,
 nav ul li a.active {
     color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--primary-color);
 }
 
 .theme-toggle {
@@ -207,15 +250,6 @@ body.light-theme .circles div {
     }
 }
 
-/* Glassy Sections */
-.glassy-section {
-    padding: 100px 0;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-top: var(--glass-border);
-    border-bottom: var(--glass-border);
-}
-
 /* Light mode specific styles for glassy sections */
 body.light-theme .glassy-section {
     background: rgba(230, 243, 255, 0.5);
@@ -229,6 +263,15 @@ body.light-theme .glassy-section:nth-child(even) {
 /* Dark mode styles remain unchanged */
 body.dark-theme .glassy-section {
     background: var(--glass-background);
+}
+
+/* Glassy Sections */
+.glassy-section {
+    padding: 100px 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: var(--glass-border);
+    border-bottom: var(--glass-border);
 }
 
 .glassy-section h2 {
@@ -259,6 +302,20 @@ p.glassy-text {
     margin-bottom: 40px;
 }
 
+#contact.glassy-section .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 15vh; /* Adjust this value as needed */
+}
+
+#contact.glassy-section h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
 .cta-button {
     display: inline-block;
     padding: 15px 30px;
@@ -268,6 +325,7 @@ p.glassy-text {
     border-radius: 30px;
     font-weight: 600;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px; /* Add some space between the text and button */
 }
 
 .cta-button:hover {
@@ -398,39 +456,6 @@ body.light-theme .project-card {
     font-size: 14px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
-
-    nav ul {
-        margin-top: 20px;
-    }
-
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    .hero p {
-        font-size: 18px;
-    }
-
-    .services-grid,
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-links,
-    .social-links {
-        margin-top: 20px;
-    }
-}
 
 /* Animations */
 @keyframes fadeIn {
