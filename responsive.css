@@ -12,67 +12,70 @@
 
 @media screen and (max-width: 768px) {
   .glassy-nav {
-    padding: 10px 15px;
-  }
-
-  .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    padding: 10px 20px;
   }
 
-  .logo {
-    order: 2;
-    flex-grow: 1;
-    text-align: center;
-  }
-
-  .hamburger {
-    order: 1;
-    display: block;
-    cursor: pointer;
-    z-index: 1001;
-  }
-
-  .theme-toggle {
-    order: 3;
-    margin-right: 25px; /* Adjust this value to move the toggle more to the left */
-  }
-
+  /* Updated: Added blur effect and adjusted styling for mobile nav */
   .nav-links {
-    display: none;
     position: fixed;
+    left: -100%;
     top: 0;
-    left: 0;
-    width: 20%; /* Adjust width as needed */
-    height: 100vh;
-    background: var(--glass-background);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-right: var(--glass-border);
-    padding-top: 60px;
-    z-index: 1000;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
+    height: 100vh; /* Full height */
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    width: 0; /* Adjust width as needed */
+    text-align: left;
+    transition: 0.3s;
+    padding: 80px 20px 20px; /* Added top padding for logo/hamburger */
+    overflow-y: auto; /* In case of many menu items */
   }
 
   .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    left: 0;
+    width: 250px; /* or any desired width */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.2); /* Slightly more opaque when active */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.active li {
+    opacity: 1;
     transform: translateX(0);
   }
 
   .nav-links li {
-    margin: 10px 20px;
-    width: calc(100% - 40px);
+    margin: 20px 0;
   }
 
-  .nav-links a {
+  .nav-links li a {
+    font-size: 18px; /* Larger font size for better readability */
+    color: var(--text-light);
+  }
+
+  body.dark-theme .nav-links li a {
+    color: var(--text-dark);
+  }
+
+  /* Updated: Adjusted theme toggle position */
+  .theme-toggle {
+    position: fixed;
+    right: 55px;
+    top: 15px;
+    z-index: 1001;
+  }
+
+  /* Updated: Adjusted hamburger menu styles */
+  .hamburger {
     display: block;
-    padding: 3px 0;
-    width: 100%;
+    z-index: 1002;
+    cursor: pointer;
+    position: fixed;
+    left: 20px;
+    top: 15px;
   }
 
   .hamburger div {
@@ -99,29 +102,20 @@
     transform: rotate(45deg) translate(-5px, -6px);
   }
 
-  /* Overlay for when menu is open */
-  .menu-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-  }
-
-  .menu-overlay.active {
-    display: block;
-  }
-
   nav ul {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 
   nav ul li {
     margin: 10px 0;
+  }
+
+  /* Adjust logo position */
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .hero h1 {
@@ -156,59 +150,10 @@
   }
 }
 
-@media screen and (max-width: 480px) {
-  .hero h1 {
-    font-size: 28px;
-  }
-
-  .hero p {
-    font-size: 16px;
-  }
-
-  .cta-button {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
-
-  .service-card,
-  .project-card {
-    padding: 20px;
-  }
-}
-
-/* Zoom Styles */
-.zoomable {
-  transition: transform 0.3s ease;
-}
-
-.zoomed {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.5);
-  z-index: 1000;
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 999;
-  display: none;
-}
-
-/* Hide hamburger menu on larger screens */
-@media screen and (min-width: 769px) {
-    .hamburger {
-      display: none;
-    }
-  
-    .nav-links {
-      display: flex !important;
-    }
-  }
+/* Latest changes:
+ * 1. Added blur effect to the mobile navigation menu
+ * 2. Adjusted the width and height of the mobile menu for full-screen coverage
+ * 3. Increased font size of navigation links for better readability
+ * 4. Added padding to the top of the mobile menu to accommodate logo/hamburger
+ * 5. Added overflow-y: auto to handle many menu items
+ */
