@@ -12,34 +12,67 @@
 
 @media screen and (max-width: 768px) {
   .glassy-nav {
-    padding: 10px 0;
+    padding: 10px 15px;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .logo {
+    order: 2;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .hamburger {
+    order: 1;
+    display: block;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .theme-toggle {
+    order: 3;
+    margin-right: 25px; /* Adjust this value to move the toggle more to the left */
   }
 
   .nav-links {
     display: none;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    top: 60px;
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 100%;
+    width: 20%; /* Adjust width as needed */
+    height: 100vh;
     background: var(--glass-background);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: var(--glass-border);
+    border-right: var(--glass-border);
+    padding-top: 60px;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
   }
 
   .nav-links.active {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transform: translateX(0);
   }
 
   .nav-links li {
-    margin: 10px 0;
+    margin: 10px 20px;
+    width: calc(100% - 40px);
   }
 
-  .hamburger {
+  .nav-links a {
     display: block;
-    cursor: pointer;
+    padding: 3px 0;
+    width: 100%;
   }
 
   .hamburger div {
@@ -64,6 +97,22 @@
 
   .hamburger.active .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  /* Overlay for when menu is open */
+  .menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .menu-overlay.active {
+    display: block;
   }
 
   nav ul {
