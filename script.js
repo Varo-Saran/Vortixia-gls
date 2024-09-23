@@ -198,34 +198,39 @@ function setupZoom() {
     setupZoom();
   });
 
-// Hamburger menu functionality
-function setupHamburgerMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const menuOverlay = document.createElement('div');
-    menuOverlay.classList.add('menu-overlay');
-    document.body.appendChild(menuOverlay);
+ 
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+      
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+      
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+          });
+        });
+      })
   
-    function toggleMenu() {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-      menuOverlay.classList.toggle('active');
-      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    }
-  
-    hamburger.addEventListener('click', toggleMenu);
-    menuOverlay.addEventListener('click', toggleMenu);
-  
-    // Close menu when a link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', toggleMenu);
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+      }
     });
-  }
-  
-  // Initialize all functionality
-  document.addEventListener('DOMContentLoaded', () => {
+
+
+// Initialize all functionality
+document.addEventListener('DOMContentLoaded', () => {
     createCircles();
     updateBackgroundAnimation();
     setupZoom();
-    setupHamburgerMenu();
-  });
+    setupHamburgerMenu(); // Add this line to call the new function
+});
