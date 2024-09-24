@@ -66,7 +66,8 @@
   }
 
   body.dark-theme .nav-links {
-    background-color: rgba(10, 30, 61, 0.464); /* Darker semi-transparent background for dark theme */
+    box-shadow: 0 4px 30px rgba(196, 220, 255, 0.238);
+    background-color: rgba(17, 38, 72, 0.537); /* Darker semi-transparent background for dark theme */
   }
 
   .nav-links.active li {
