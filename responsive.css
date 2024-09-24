@@ -31,15 +31,19 @@
   .nav-links {
     position: fixed;
     left: -100%;
-    top: 0;
-    height: 100vh; /* Full height */
+    top: 0px; /* Adjust this to leave some space at the top */
+    height: 370%; /* Full height of the viewport */
     flex-direction: column;
-    width: 0; /* Adjust width as needed */
+    width: 10%; /* Adjust this value to change the width of the menu */
+    max-width: 100px; /* Maximum width of the menu */
     text-align: left;
     transition: 0.3s;
-    padding: 80px 60px 20px; /* Added top padding for logo/hamburger */
-    overflow-y: auto; /* In case of many menu items */
+    padding: 80px 60px 20px; /* Adjust padding as needed */
+    overflow-y: auto;
     z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.381); /* Semi-transparent background */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.344);
+    border-radius: 0 20px 20px 0; /* Rounded corners on the right side */
   }
 
   .nav-links::before {
@@ -49,15 +53,20 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.1);
+    background: inherit;
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
     z-index: -1;
+    border-radius: inherit; /* Match the border-radius of the parent */
   }
 
   .nav-links.active {
     left: 0;
     width: 250px;
+  }
+
+  body.dark-theme .nav-links {
+    background-color: rgba(10, 30, 61, 0.464); /* Darker semi-transparent background for dark theme */
   }
 
   .nav-links.active li {
@@ -66,20 +75,28 @@
   }
 
   .nav-links li {
-    margin: 20px 0;
-    opacity: 0;
-    transform: translateX(-20px);
+    margin: 10px 0; /* Adjust vertical spacing between menu items */
+    opacity: 1;
+    transform: translateX(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .nav-links li a {
     font-size: 18px; /* Larger font size for better readability */
     color: var(--text-light);
+    display: block;
+    padding: 2px 2px; /* Add horizontal padding */
   }
 
   body.dark-theme .nav-links li a {
     color: var(--text-dark);
   }
+
+  body.dark-theme .nav-links li a:hover,
+  body.dark-theme .nav-links li a:focus {
+    color: var(--primary-color); /* Darker highlight for dark theme */
+  }
+  
 
   /* Updated: Adjusted theme toggle position */
   .theme-toggle {
@@ -136,7 +153,7 @@
   .logo {
     position: absolute;
     left: 50%;
-    transform: translateX(-80px);
+    transform: translateX(-75px);
   }
 
   .hero h1 {
