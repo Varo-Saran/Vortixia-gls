@@ -135,8 +135,8 @@
   /* Adjust logo position */
   .logo {
     position: absolute;
-    left: 40%;
-    transform: translateX(-100px);
+    left: 50%;
+    transform: translateX(-80px);
   }
 
   .hero h1 {
