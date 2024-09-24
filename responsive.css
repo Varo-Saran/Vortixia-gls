@@ -20,11 +20,16 @@
   }
 
   .glassy-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-    position: relative;
+    transition: transform 0.3s ease;
   }
 
   .glassy-nav .container {
@@ -36,7 +41,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
     position: relative;
   }
 
@@ -63,34 +67,27 @@
   /* Updated: Added blur effect and adjusted styling for mobile nav */
   .nav-links {
     position: fixed;
-    left: -100%;
-    top: 0px; /* Adjust this to leave some space at the top */
-    height: 370%; /* Full height of the viewport */
+    left: -100vw;
+    top: 0px;
+    bottom: 30px;
+    height: 65vh; /* Changed from 370% to 100vh */
     flex-direction: column;
-    width: 10%; /* Adjust this value to change the width of the menu */
-    max-width: 100px; /* Maximum width of the menu */
+    width: 70vw; /* Start with 0 width */
+    max-width: 100px; /* Increased from 100px */
     text-align: left;
     transition: 0.3s;
-    padding: 80px 60px 20px; /* Adjust padding as needed */
+    padding: 15vh 5vw 5vh; /* Adjusted padding */
     overflow-y: auto;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.381); /* Semi-transparent background */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.248);
-    border-radius: 0 20px 20px 0; /* Rounded corners on the right side */
+    background-color: rgba(220, 233, 255, 0.838); /* Lighter background */
+    box-shadow: 0 4px 30px rgba(31, 38, 135, 0.421);
+    border-radius: 0 20px 20px 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .nav-links::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: inherit;
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
-    z-index: -1;
-    border-radius: inherit; /* Match the border-radius of the parent */
+    content: none;
   }
 
   .nav-links.active {
@@ -100,7 +97,7 @@
 
   body.dark-theme .nav-links {
     box-shadow: 0 4px 30px rgba(196, 220, 255, 0.238);
-    background-color: rgba(17, 38, 72, 0.537); /* Darker semi-transparent background for dark theme */
+    background-color: rgba(17, 38, 72, 0.926); /* Darker semi-transparent background for dark theme */
   }
 
   .nav-links.active li {
@@ -109,25 +106,40 @@
   }
 
   .nav-links li {
-    margin: 10px 0; /* Adjust vertical spacing between menu items */
+    margin: 2vh 0; /* Adjust vertical spacing between menu items */
     opacity: 1;
     transform: translateX(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .nav-links li a {
-    font-size: 18px; /* Larger font size for better readability */
+    font-size: clamp(10px, 2vw, 15px); /* Larger font size for better readability */
     color: var(--text-light);
     display: block;
     padding: 2px 2px; /* Add horizontal padding */
+    border-radius: 0px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   }
 
   body.dark-theme .nav-links li a {
     color: var(--text-dark);
   }
 
+  /* Hide or adjust the nav indicator for mobile */
+  .nav-links .nav-indicator {
+    display: none; /* This will hide the indicator completely on mobile */
+  }
+
+  .nav-links li a:hover,
+  .nav-links li a:focus {
+    /*background-color: rgba(76, 154, 255, 0.1); /* Light blue background on hover */
+    color: var(--primary-color);
+    transform: translateX(5px); /* Slight shift to the right on hover */
+  }
+
   body.dark-theme .nav-links li a:hover,
   body.dark-theme .nav-links li a:focus {
+    /*background-color: rgba(76, 154, 255, 0.2); /* Slightly darker background for dark theme */
     color: var(--primary-color); /* Darker highlight for dark theme */
   }
   
@@ -190,12 +202,25 @@
     transform: translateX(-75px);
   }
 
+  .hero {
+    min-height: calc(100vh - 70px); /* Subtract header height from 100vh */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
   .hero h1 {
     font-size: 36px;
   }
 
   .hero p {
     font-size: 18px;
+  }
+
+  main {
+    padding-top: 60px; /* Adjust this value based on your header's height */
   }
 
   .services-grid,
@@ -217,28 +242,71 @@
     font-size: 28px;
   }
 
+   /* Footer adjustments for mobile */
+   .glassy-footer {
+    padding: 30px 15px; /* Reduce padding and ensure some space on sides */
+  }
+
   .footer-content {
     flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 
-  .footer-links,
-  .social-links {
-    margin-top: 20px;
+  .footer-logo {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .footer-links {
+    display: none;
+  }
+
+  .footer-links li {
+    margin: 5px 0;
+    width: 100%;
     text-align: center;
   }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .social-icon {
+    margin: 0 10px;
+    font-size: 24px;
+  }
+
+  /* Ensure content doesn't overflow */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .copyright {
+    font-size: 14px;
+    margin-top: 20px;
+  }
 }
+
 
 /* Glassy effect enhancement for better visibility */
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .glassy-section {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--section-background);
       backdrop-filter: blur(10px) saturate(180%);
       -webkit-backdrop-filter: blur(10px) saturate(180%);
   }
 
   body.dark-theme .glassy-section {
-      background: rgba(0, 0, 0, 0.1);
+      background: rgba(15, 42, 74, 0.7);
   }
 }
 
