@@ -84,9 +84,78 @@ function updateBackgroundAnimation() {
     }
 }
 
-// GSAP Animations (unchanged)
+// GSAP Animations
 function setupGSAPAnimations() {
-    // ... (keep your existing GSAP animations)
+    // Animate hero section
+    gsap.from('.hero h1', {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: 'power3.out'
+    });
+
+    gsap.from('.hero p', {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        delay: 0.3,
+        ease: 'power3.out'
+    });
+
+    gsap.from('.hero .cta-button', {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        delay: 0.6,
+        ease: 'power3.out'
+    });
+
+    // Animate sections on scroll
+    gsap.utils.toArray('.glassy-section').forEach(section => {
+        gsap.from(section, {
+            opacity: 0,
+            y: 100,
+            duration: 1,
+            scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    });
+
+    // Animate service cards
+    gsap.utils.toArray('.service-card').forEach((card, index) => {
+        gsap.from(card, {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            delay: index * 0.2,
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    });
+
+    // Animate project cards
+    gsap.utils.toArray('.project-card').forEach((card, index) => {
+        gsap.from(card, {
+            opacity: 0,
+            scale: 0.9,
+            duration: 0.8,
+            delay: index * 0.2,
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    });
 }
 
 // Smooth scrolling for navigation links
@@ -107,9 +176,16 @@ function setupSmoothScrolling() {
     });
 }
 
-// Logo click functionality (unchanged)
+// Logo click functionality
 function setupLogoClick() {
-    // ... (keep your existing logo click function)
+    const logo = document.querySelector('.logo');
+    logo.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 }
 
 // Parallax effect for hero section
@@ -123,14 +199,69 @@ function setupParallax() {
     }
 }
 
-// Animate navigation on scroll (unchanged)
+// Animate navigation on scroll
 function setupNavAnimation() {
-    // ... (keep your existing nav animation function)
+    const nav = document.querySelector('.glassy-nav');
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function updateNav() {
+        const currentScrollY = window.scrollY;
+        const scrollDifference = currentScrollY - lastScrollY;
+
+        // Show nav if scrolling up or at the top of the page
+        if (scrollDifference < 0 || currentScrollY <= 0) {
+            nav.style.transform = 'translateY(0)';
+            nav.style.opacity = '1';
+        } 
+        // Hide nav if scrolling down and not at the top
+        else if (scrollDifference > 0 && currentScrollY > 50) {
+            nav.style.transform = 'translateY(-100%)';
+            nav.style.opacity = '0';
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(updateNav);
+            ticking = true;
+        }
+    });
+
+    // Initial call to set correct state
+    updateNav();
 }
 
-// Zoom functionality (unchanged)
+// Zoom functionality
 function setupZoom() {
-    // ... (keep your existing zoom function)
+    const zoomableElements = document.querySelectorAll('.service-card, .project-card, .hero h1, .hero p');
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(overlay);
+
+    zoomableElements.forEach(element => {
+        element.classList.add('zoomable');
+        element.addEventListener('click', () => {
+            if (!element.classList.contains('zoomed')) {
+                element.classList.add('zoomed');
+                overlay.style.display = 'block';
+            } else {
+                element.classList.remove('zoomed');
+                overlay.style.display = 'none';
+            }
+        });
+    });
+
+    overlay.addEventListener('click', () => {
+        const zoomedElement = document.querySelector('.zoomed');
+        if (zoomedElement) {
+            zoomedElement.classList.remove('zoomed');
+            overlay.style.display = 'none';
+        }
+    });
 }
 
 // Hamburger menu functionality
@@ -170,7 +301,8 @@ function setupHamburgerMenu() {
         }
     });
 }
-//hide footer links mobile
+
+// Hide footer links on mobile
 function handleFooterLinksVisibility() {
     const footerLinks = document.querySelector('.footer-links');
     if (window.innerWidth <= 768) {
@@ -179,9 +311,6 @@ function handleFooterLinksVisibility() {
         footerLinks.style.display = 'flex';
     }
 }
-
-window.addEventListener('resize', handleFooterLinksVisibility);
-window.addEventListener('orientationchange', handleFooterLinksVisibility);
 
 // Initialize all functionality
 document.addEventListener('DOMContentLoaded', () => {
@@ -209,5 +338,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         createCircles(); // Recreate circles on resize
         setupParallax(); // Re-setup parallax
+        handleFooterLinksVisibility(); // Re-check footer links visibility
     });
 });
