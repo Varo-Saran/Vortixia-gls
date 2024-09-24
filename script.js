@@ -137,12 +137,19 @@ function setupZoom() {
 function setupHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+    const nav = document.querySelector('.glassy-nav');
     const body = document.body;
 
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
         body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        
+        // Ensure nav is visible when menu is open
+        if (navLinks.classList.contains('active')) {
+            nav.style.transform = 'translateY(0)';
+            nav.style.opacity = '1';
+        }
     });
 
     // Close menu when a link is clicked
