@@ -13,9 +13,18 @@
 @media screen and (max-width: 768px) {
   .glassy-nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 10px 20px;
+    position: relative;
+  }
+
+  .glassy-nav .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    position: relative;
   }
 
   /* Updated: Added blur effect and adjusted styling for mobile nav */
@@ -25,21 +34,30 @@
     top: 0;
     height: 100vh; /* Full height */
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.1); /* Transparent background */
     width: 0; /* Adjust width as needed */
     text-align: left;
     transition: 0.3s;
-    padding: 80px 20px 20px; /* Added top padding for logo/hamburger */
+    padding: 80px 60px 20px; /* Added top padding for logo/hamburger */
     overflow-y: auto; /* In case of many menu items */
+    z-index: 1000;
+  }
+
+  .nav-links::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    z-index: -1;
   }
 
   .nav-links.active {
     left: 0;
-    width: 250px; /* or any desired width */
-    backdrop-filter: blur(90px);
-    -webkit-backdrop-filter: blur(90px);
-    background: rgba(255, 255, 255, 0.2); /* Slightly more opaque when active */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    width: 250px;
   }
 
   .nav-links.active li {
@@ -49,6 +67,9 @@
 
   .nav-links li {
     margin: 20px 0;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .nav-links li a {
@@ -115,7 +136,7 @@
   .logo {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-80px);
   }
 
   .hero h1 {
@@ -147,6 +168,7 @@
   .footer-links,
   .social-links {
     margin-top: 20px;
+    text-align: center;
   }
 }
 
