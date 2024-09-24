@@ -69,6 +69,7 @@ body.dark-theme {
     background: var(--glass-background);
     border-bottom: var(--glass-border);
     transition: transform 0.3s ease, opacity 0.3s ease;
+    padding: 20px 0;
 }
 
 nav {
