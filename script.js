@@ -11,6 +11,42 @@ themeToggle.addEventListener('click', () => {
     updateBackgroundAnimation();
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const nav = document.querySelector('.nav-links');
+    const navItems = nav.querySelectorAll('a');
+    
+    // Create the indicator element
+    const indicator = document.createElement('div');
+    indicator.className = 'nav-indicator';
+    nav.appendChild(indicator);
+
+    function moveIndicator(el) {
+        indicator.style.width = `${el.offsetWidth}px`;
+        indicator.style.left = `${el.offsetLeft}px`;
+    }
+
+    navItems.forEach(item => {
+        item.addEventListener('mouseover', function() {
+            moveIndicator(this);
+        });
+    });
+
+    // Move indicator to active item on page load
+    const activeItem = nav.querySelector('a.active');
+    if (activeItem) {
+        moveIndicator(activeItem);
+    }
+
+    // Reset indicator when mouse leaves the nav
+    nav.addEventListener('mouseleave', function() {
+        if (activeItem) {
+            moveIndicator(activeItem);
+        } else {
+            indicator.style.width = '0';
+        }
+    });
+});
+
 // Function to create animated circles
 function createCircles() {
     const heroBackground = document.querySelector('.hero-background');
@@ -78,6 +114,7 @@ gsap.from('.hero .cta-button', {
     ease: 'power3.out'
 });
 
+
 // Animate sections on scroll
 gsap.utils.toArray('.glassy-section').forEach(section => {
     gsap.from(section, {
@@ -135,6 +172,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const logo = document.querySelector('.logo');
+    logo.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({//window.location.href = '/'; // Replace with your home page URL
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
@@ -162,8 +211,8 @@ AOS.init({
     offset: 100
 });
 
-// Zoom functionality
-function setupZoom() {
+    // Zoom functionality
+    function setupZoom() {
     const zoomableElements = document.querySelectorAll('.service-card, .project-card, .hero h1, .hero p');
     const overlay = document.createElement('div');
     overlay.classList.add('overlay');
@@ -225,6 +274,7 @@ function setupZoom() {
         hamburger.classList.remove('active');
       }
     });
+    
 
 
 // Initialize all functionality
