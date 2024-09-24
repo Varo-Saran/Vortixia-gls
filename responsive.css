@@ -8,9 +8,17 @@
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  
 }
 
 @media screen and (max-width: 768px) {
+   /* Fix for horizontal scroll */
+   html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
   .glassy-nav {
     display: flex;
     justify-content: center;
@@ -20,11 +28,36 @@
   }
 
   .glassy-nav .container {
+    max-width: 100vw;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
     position: relative;
+  }
+
+  .glassy-section {
+    padding: 60px 0;
+  }
+
+  #about h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  #about p {
+    font-size: 16px;
+    padding: 0 20px;
+  }
+
+  /* Dark mode adjustments */
+  body.dark-theme #about h2,
+  body.dark-theme #about p {
+    color: var(--text-dark);
   }
 
   /* Updated: Added blur effect and adjusted styling for mobile nav */
@@ -42,7 +75,7 @@
     overflow-y: auto;
     z-index: 1000;
     background-color: rgba(255, 255, 255, 0.381); /* Semi-transparent background */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.344);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.248);
     border-radius: 0 20px 20px 0; /* Rounded corners on the right side */
   }
 
@@ -168,6 +201,12 @@
   .services-grid,
   .projects-grid {
     grid-template-columns: 1fr;
+    max-width: 100vw;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
+    gap: 20px;
   }
 
   .glassy-section {
@@ -189,6 +228,22 @@
     text-align: center;
   }
 }
+
+/* Glassy effect enhancement for better visibility */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .glassy-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+  }
+
+  body.dark-theme .glassy-section {
+      background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+
 
 /* Latest changes:
  * 1. Added blur effect to the mobile navigation menu
