@@ -68,7 +68,7 @@ body.dark-theme {
     -webkit-backdrop-filter: blur(10px);
     background: var(--glass-background);
     border-bottom: var(--glass-border);
-    padding: 20px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 nav {
