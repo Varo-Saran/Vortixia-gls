@@ -64,6 +64,7 @@ body.dark-theme {
     -webkit-backdrop-filter: blur(10px);
     background: var(--glass-background);
     border-bottom: var(--glass-border);
+    padding: 20px 0;
 }
 
 nav {
@@ -76,6 +77,44 @@ nav {
 .logo {
     font-size: 24px;
     font-weight: 700;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit; /* This will ensure it uses the theme color */
+    padding-bottom: 5px; /* Space for the underline */
+}
+
+/* Glow effect on hover */
+.logo:hover {
+    text-shadow:    0px 0px 10px rgba(0, 109, 251, 0.436), 
+                    1px 1px 0px rgba(18, 121, 255, 0.489);
+}
+
+/* Dark theme adjustment */
+body.dark-theme .logo:hover {
+    text-shadow:    0px 0px 10px rgba(255, 255, 255, 0.5), 
+                    01px 1px 0px rgba(255, 255, 255, 0.3);
+}
+
+/* Ensure the glow doesn't affect layout */
+.logo::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    color: transparent;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    height: 2px; /* Adjust thickness as needed */
+    transform: scaleX(1); /* Always visible */
+}
+
+.logo:hover::after {
+    opacity: 0.7;
+    transform: scaleX(1.1); /* Slightly expand on hover */
 }
 
 nav ul {
@@ -94,12 +133,19 @@ nav ul li a {
     transition: color 0.3s ease;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
-    color: var(--primary-color);
+/* Style for the active link */
+.nav-links a.active {
+    color: inherit; /* This ensures it uses the default text color, not blue */
+}
+
+/* Hover effect */
+.nav-links a:hover,
+.nav-links a:focus {
+    color: var(--primary-color); /* Change color on hover/focus */
 }
 
 .nav-links {
+  position: relative;
   display: flex;
   list-style-type: none;
   margin: 0;
@@ -115,11 +161,20 @@ nav ul li a.active {
   color: inherit;
   font-weight: 500;
   transition: color 0.3s ease;
+  padding: 5px 0;
 }
 
-.nav-links li a:hover,
-.nav-links li a.active {
-  color: var(--primary-color);
+.nav-links .nav-indicator {
+    position: absolute;
+    bottom: -5px;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+/* Ensure visited links don't stay blue */
+.nav-links a:visited {
+    color: inherit;
 }
 
 .theme-toggle {
@@ -270,6 +325,7 @@ body.dark-theme .glassy-section {
     padding: 100px 0;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
     border-top: var(--glass-border);
     border-bottom: var(--glass-border);
 }
@@ -300,6 +356,30 @@ h1.glassy-text {
 p.glassy-text {
     font-size: 24px;
     margin-bottom: 40px;
+}
+
+#about.glassy-section {
+    text-align: center;
+}
+
+#about h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: var(--text-light);
+}
+
+#about p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 90%;
+    margin: 0 auto;
+    color: var(--text-light);
+}
+
+/* Dark mode adjustments */
+body.dark-theme #about h2,
+body.dark-theme #about p {
+    color: var(--text-dark);
 }
 
 #contact.glassy-section .container {
@@ -444,6 +524,12 @@ body.light-theme .project-card {
     font-size: 24px;
     color: inherit;
     transition: color 0.3s ease;
+}
+
+/* Ensure all social icons have consistent size and color */
+.social-icon i {
+    font-size: 24px; /* Adjust size as needed */
+    color: inherit; /* Or specify a color */
 }
 
 .social-icon:hover {
