@@ -1,7 +1,5 @@
 (function() {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    // Throttle function
+    // Throttle function to limit the rate at which a function can fire
     function throttle(func, limit) {
         let inThrottle;
         return function() {
@@ -18,30 +16,28 @@
     // Optimize scroll events
     function optimizeScroll() {
         const scrollHandler = throttle(() => {
-            // Parallax effect for hero section (disabled on mobile)
-            if (!isMobile) {
-                const scrollY = window.scrollY;
+            const scrollY = window.scrollY;
+            
+            // Use requestAnimationFrame for smoother animations
+            requestAnimationFrame(() => {
+                // Parallax effect for hero section
                 const heroContent = document.querySelector('.hero .container');
                 if (heroContent) {
                     heroContent.style.transform = `translateY(${scrollY * 0.5}px)`;
                 }
-            }
 
-            // Animate navigation on scroll (simplified for mobile)
-            const nav = document.querySelector('.glassy-nav');
-            if (nav) {
-                if (isMobile) {
-                    nav.style.transform = window.scrollY > 50 ? 'translateY(-100%)' : 'translateY(0)';
-                } else {
-                    if (window.lastScrollY < window.scrollY) {
+                // Animate navigation on scroll
+                const nav = document.querySelector('.glassy-nav');
+                if (nav) {
+                    if (window.lastScrollY < scrollY) {
                         gsap.to(nav, { y: '-100%', duration: 0.3 });
                     } else {
                         gsap.to(nav, { y: '0%', duration: 0.3 });
                     }
-                    window.lastScrollY = window.scrollY;
+                    window.lastScrollY = scrollY;
                 }
-            }
-        }, isMobile ? 100 : 16); // Lower frequency on mobile
+            });
+        }, 16); // ~60fps
 
         window.addEventListener('scroll', scrollHandler, { passive: true });
     }
@@ -50,38 +46,21 @@
     function optimizeGSAPAnimations() {
         ScrollTrigger.config({ limitCallbacks: true });
         ScrollTrigger.clearMatchMedia();
-
-        if (isMobile) {
-            // Simplify animations on mobile
-            gsap.utils.toArray('.glassy-section, .service-card, .project-card').forEach(element => {
-                gsap.from(element, {
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.5,
-                    scrollTrigger: {
-                        trigger: element,
-                        start: 'top 90%',
-                        once: true
-                    }
-                });
-            });
-        }
     }
 
     // Defer non-critical operations
     function deferOperations() {
+        // Defer AOS initialization
         setTimeout(() => {
             AOS.init({
-                duration: isMobile ? 500 : 1000,
+                duration: 1000,
                 once: true,
-                offset: isMobile ? 50 : 100,
-                disable: isMobile ? 'phone' : false
+                offset: 100
             });
-        }, isMobile ? 1000 : 100);
+        }, 100);
 
-        if (!isMobile) {
-            setTimeout(setupZoom, 200);
-        }
+        // Defer zoom setup
+        setTimeout(setupZoom, 200);
     }
 
     // Optimize circle creation
@@ -93,10 +72,11 @@
                 circlesContainer.classList.add('circles');
                 const fragment = document.createDocumentFragment();
 
-                const circleCount = isMobile ? 8 : 15; // Reduce number of circles on mobile
+                // Use a more efficient loop
+                const circleCount = window.innerWidth <= 768 ? 8 : 15;
                 for (let i = 0; i < circleCount; i++) {
                     const circle = document.createElement('div');
-                    const size = Math.random() * (isMobile ? 40 : 60) + 10;
+                    const size = Math.random() * (window.innerWidth <= 768 ? 40 : 60) + 10;
                     circle.style.cssText = `
                         width: ${size}px;
                         height: ${size}px;
@@ -110,29 +90,10 @@
                 circlesContainer.appendChild(fragment);
                 heroBackground.appendChild(circlesContainer);
             }
-        }, isMobile ? 200 : 100);
+        }, 100);
 
         createCircles();
-    }
-
-    // Optimize images
-    function optimizeImages() {
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.onload = () => img.classList.add('loaded');
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
-            });
-        }
+        window.addEventListener('resize', createCircles, { passive: true });
     }
 
     // Main optimization function
@@ -141,7 +102,6 @@
         optimizeGSAPAnimations();
         deferOperations();
         optimizeCircles();
-        optimizeImages();
     }
 
     // Run optimizations when the page is loaded
