@@ -312,6 +312,27 @@ function handleFooterLinksVisibility() {
     }
 }
 
+// Back to Top button functionality
+function setupBackToTopButton() {
+    const backToTopButton = document.createElement('button');
+    backToTopButton.innerHTML = '&#8593;'; // Up arrow
+    backToTopButton.classList.add('back-to-top');
+    document.body.appendChild(backToTopButton);
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    });
+
+    backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
 // Initialize all functionality
 document.addEventListener('DOMContentLoaded', () => {
     setupNavIndicator();
@@ -325,6 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupZoom();
     setupHamburgerMenu();
     handleFooterLinksVisibility();
+    setupBackToTopButton();
 
     // Initialize AOS for scroll animations
     AOS.init({
