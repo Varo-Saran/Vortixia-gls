@@ -305,6 +305,30 @@
    padding: 20px;
  }
 
+ .project-card {
+  height: auto;
+  min-height: 250px;
+ }
+
+ .project-card-content {
+  min-height: 150px;
+ }
+
+.project-card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+ }
+
+.project-card p {
+  font-size: 14px;
+  line-height: 1.4;
+ }
+
+.learn-more {
+  margin-top: 15px;
+  font-size: 14px;
+ }
+
  /* Enhance footer for mobile */
  .glassy-footer {
    text-align: center;
@@ -313,7 +337,7 @@
  .social-links {
    justify-content: space-around;
    max-width: 200px;
-   margin: 20px auto;
+   margin-bottom: 0;
  }
 
  /* Improve form elements for touch */
@@ -350,6 +374,10 @@
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .project-card {
+    min-height: 280px;
+  }
 }
 
 /* Improve performance of animations on mobile */
@@ -357,6 +385,25 @@
   * {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* Adjust styles for very small screens */
+@media screen and (max-width: 360px) {
+  .project-card {
+    padding: 15px;
+  }
+
+  .project-card h3 {
+    font-size: 20px;
+  }
+
+  .project-card p {
+    font-size: 13px;
+  }
+
+  .learn-more {
+    font-size: 13px;
   }
 }
 
