@@ -70,7 +70,7 @@
     left: -100vw;
     top: 0px;
     bottom: 20px;
-    height: 45vh; /* Changed from 370% to 100vh */
+    height: 30vh; /* Changed from 370% to 100vh */
     flex-direction: column;
     width: 70vw; /* Start with 0 width */
     max-width: 100px; /* Increased from 100px */
@@ -212,11 +212,14 @@
   }
 
   .hero h1 {
-    font-size: 36px;
+    font-size: 32px;
+    line-height: 1.2;
   }
 
   .hero p {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
   }
 
   main {
@@ -296,6 +299,37 @@
   }
 }
 
+ /* Improve card layouts */
+ .service-card,
+ .project-card {
+   padding: 20px;
+ }
+
+ /* Enhance footer for mobile */
+ .glassy-footer {
+   text-align: center;
+ }
+
+ .social-links {
+   justify-content: space-around;
+   max-width: 200px;
+   margin: 20px auto;
+ }
+
+ /* Improve form elements for touch */
+ input, 
+ textarea, 
+ button {
+   font-size: 16px; /* Prevent zoom on focus in iOS */
+   padding: 12px; /* Larger touch targets */
+ }
+
+ /* Add smooth scrolling for iOS */
+ html {
+   -webkit-overflow-scrolling: touch;
+ }
+
+
 
 /* Glassy effect enhancement for better visibility */
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
@@ -310,6 +344,22 @@
   }
 }
 
+/* Add styles for larger phones and small tablets */
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .services-grid,
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Improve performance of animations on mobile */
+@media screen and (max-width: 768px) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 
 
 
@@ -318,5 +368,9 @@
  * 2. Adjusted the width and height of the mobile menu for full-screen coverage
  * 3. Increased font size of navigation links for better readability
  * 4. Added padding to the top of the mobile menu to accommodate logo/hamburger
- * 5. Added overflow-y: auto to handle many menu items
+ * 6. Providing a slightly different layout for larger phones and small tablets.
+ * 7. Added smooth scrolling for iOS devices.
+ * 8. Improved performance by disabling animations on mobile devices.
+ * 9. Enhanced form elements for better touch interaction.
+ 
  */
