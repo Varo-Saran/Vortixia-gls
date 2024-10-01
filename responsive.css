@@ -72,7 +72,7 @@
     bottom: 20px;
     height: 30vh; /* Changed from 370% to 100vh */
     flex-direction: column;
-    width: 100vw; /* Start with 0 width */
+    width: 80vw; /* Start with 0 width */
     max-width: 500px; /* Increased from 100px */
     text-align: left;
     transition: 0.3s;
@@ -106,7 +106,7 @@
   }
 
   .nav-links li {
-    margin: 1px; /* Adjust vertical spacing between menu items */
+    margin: 0px; /* Adjust vertical spacing between menu items */
     opacity: 1;
     transform: translateX(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
