@@ -76,7 +76,7 @@
     max-width: 100px; /* Increased from 100px */
     text-align: left;
     transition: 0.3s;
-    padding: 15vh 10vw 5vh; /* Adjusted padding */
+    padding: 40px 20px 5vh 20px;; /* Adjusted padding */
     overflow-y: auto;
     z-index: 1000;
     background-color: rgba(220, 233, 255, 0.838); /* Lighter background */
@@ -106,14 +106,14 @@
   }
 
   .nav-links li {
-    margin: 1vh 0; /* Adjust vertical spacing between menu items */
+    margin: 0.5vh 0; /* Adjust vertical spacing between menu items */
     opacity: 1;
     transform: translateX(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .nav-links li a {
-    font-size: clamp(20px, 5vw, 30px); /* Larger font size for better readability */
+    font-size: 22px; /* Larger font size for better readability */
     color: var(--text-light);
     display: block;
     padding: 5px 5px; /* Add horizontal padding */
