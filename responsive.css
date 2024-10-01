@@ -106,7 +106,7 @@
   }
 
   .nav-links li {
-    margin: 0.5vh 0; /* Adjust vertical spacing between menu items */
+    margin: 5px; /* Adjust vertical spacing between menu items */
     opacity: 1;
     transform: translateX(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
