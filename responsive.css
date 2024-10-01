@@ -72,11 +72,11 @@
     bottom: 20px;
     height: 30vh; /* Changed from 370% to 100vh */
     flex-direction: column;
-    width: 70vw; /* Start with 0 width */
+    width: 100vw; /* Start with 0 width */
     max-width: 500px; /* Increased from 100px */
     text-align: left;
     transition: 0.3s;
-    padding: 60px 20px 5vh 20px;; /* Adjusted padding */
+    padding: 55px 20px 5vh 20px;; /* Adjusted padding */
     overflow-y: auto;
     z-index: 1000;
     background-color: rgba(220, 233, 255, 0.838); /* Lighter background */
@@ -106,7 +106,7 @@
   }
 
   .nav-links li {
-    margin: 2.5px; /* Adjust vertical spacing between menu items */
+    margin: 1px; /* Adjust vertical spacing between menu items */
     opacity: 1;
     transform: translateX(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
