@@ -76,7 +76,7 @@
     max-width: 100px; /* Increased from 100px */
     text-align: left;
     transition: 0.3s;
-    padding: 70px 20px 5vh 20px;; /* Adjusted padding */
+    padding: 60px 20px 5vh 20px;; /* Adjusted padding */
     overflow-y: auto;
     z-index: 1000;
     background-color: rgba(220, 233, 255, 0.838); /* Lighter background */
@@ -113,10 +113,10 @@
   }
 
   .nav-links li a {
-    font-size: 19px; /* Larger font size for better readability */
+    font-size: 17px; /* Larger font size for better readability */
     color: var(--text-light);
     display: block;
-    padding: 10px 5px; /* Add horizontal padding */
+    padding: 20px 5px; /* Add horizontal padding */
     border-radius: 0px;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   }
