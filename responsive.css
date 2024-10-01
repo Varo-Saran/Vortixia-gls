@@ -73,7 +73,7 @@
     height: 30vh; /* Changed from 370% to 100vh */
     flex-direction: column;
     width: 80vw; /* Start with 0 width */
-    max-width: 500px; /* Increased from 100px */
+    max-width: 250px; /* Increased from 100px */
     text-align: left;
     transition: 0.3s;
     padding: 55px 20px 5vh 20px;; /* Adjusted padding */
