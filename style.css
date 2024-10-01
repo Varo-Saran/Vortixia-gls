@@ -7,6 +7,7 @@
     --text-dark: #FFFFFF;
     --glass-background: rgba(255, 255, 255, 0.1);
     --glass-border: 1px solid rgba(255, 255, 255, 0.18);
+    --light-glass-border: 1px solid rgba(87, 87, 87, 0.275);
     --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     /* New variables for the adjusted color scheme */
     --background-main: #0F2A4A;
@@ -67,7 +68,7 @@ body.dark-theme {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     background: var(--glass-background);
-    border-bottom: var(--glass-border);
+    border-bottom: var(--light-glass-border);
     transition: transform 0.3s ease, opacity 0.3s ease;
     padding: 20px 0;
 }
@@ -183,29 +184,70 @@ nav ul li a {
 }
 
 .theme-toggle {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background-color: var(--primary-color);
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 20px;
+    transition: background-color 0.3s ease;
 }
 
-.theme-toggle i {
-    transition: opacity 0.3s ease;
+.theme-toggle .icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
 }
 
-body.light-theme .theme-toggle .fa-sun {
-    opacity: 1;
+.theme-toggle .icon.sun {
+    left: 8px;
+    color: var(--background-light);
 }
 
-body.light-theme .theme-toggle .fa-moon {
-    opacity: 0;
+.theme-toggle .icon.moon {
+    right: 8px;
+    color: white;
 }
 
-body.dark-theme .theme-toggle .fa-sun {
-    opacity: 0;
+.theme-toggle .toggle-switch {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-body.dark-theme .theme-toggle .fa-moon {
-    opacity: 1;
+body.dark-theme .theme-toggle {
+    background-color: var(--primary-color);
 }
+
+body.dark-theme .theme-toggle .toggle-switch {
+    transform: translateX(30px);
+}
+
+body.dark-theme .theme-toggle .icon.sun {
+    color: white;
+}
+
+body.dark-theme .theme-toggle .icon.moon {
+    color: white;
+}
+
+/* Hover effect */
+.theme-toggle:hover .toggle-switch {
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.2);
+}
+
 
 /* Hero Section */
 .hero {
@@ -331,8 +373,8 @@ body.dark-theme .glassy-section {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     background: rgba(255, 255, 255, 0.1);
-    border-top: var(--glass-border);
-    border-bottom: var(--glass-border);
+    border-top: var(--light-glass-border);
+    border-bottom: var(--light-glass-border);
 }
 
 .glassy-section h2 {
@@ -350,7 +392,7 @@ body.dark-theme .glassy-section {
     padding: 20px;
     border-radius: 10px;
     box-shadow: var(--glass-shadow);
-    border: var(--glass-border);
+    border: var(--light-glass-border);
 }
 
 h1.glassy-text {
@@ -432,7 +474,7 @@ body.dark-theme #about p {
     padding: 30px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: var(--glass-border);
+    border: var(--light-glass-border);
     box-shadow: var(--glass-shadow);
 }
 
@@ -446,7 +488,7 @@ body.dark-theme #about p {
     padding: 30px;
     text-align: center;
     transition: all 0.3s ease;
-    border: var(--glass-border);
+    border: var(--light-glass-border);
     box-shadow: var(--glass-shadow);
     position: relative;
     overflow: hidden;
@@ -653,7 +695,7 @@ body.dark-theme .back-to-top:hover {
     background: var(--glass-background);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-top: var(--glass-border);
+    border-top: var(--light-glass-border);
     padding: 20px 0;
 }
 
