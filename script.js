@@ -8,8 +8,10 @@ const body = document.body;
 themeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-theme');
     body.classList.toggle('light-theme');
+    themeToggle.setAttribute('aria-checked', body.classList.contains('dark-theme'));
     updateBackgroundAnimation();
 });
+
 
 // Navigation indicator
 function setupNavIndicator() {
