@@ -5,11 +5,36 @@ gsap.registerPlugin(ScrollTrigger);
 const themeToggle = document.querySelector('.theme-toggle');
 const body = document.body;
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    body.classList.toggle('light-theme');
-    themeToggle.setAttribute('aria-checked', body.classList.contains('dark-theme'));
+// Function to set the theme
+function setTheme(isDark) {
+    body.classList.toggle('dark-theme', isDark);
+    body.classList.toggle('light-theme', !isDark);
+    themeToggle.setAttribute('aria-checked', isDark);
     updateBackgroundAnimation();
+}
+
+// Check for saved theme preference or use system preference
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme === 'dark' || (savedTheme === null && prefersDarkScheme.matches)) {
+    setTheme(true);
+} else {
+    setTheme(false);
+}
+
+// Theme toggle event listener
+themeToggle.addEventListener('click', () => {
+    const isDark = !body.classList.contains('dark-theme');
+    setTheme(isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+// Listen for changes in system theme
+prefersDarkScheme.addListener((e) => {
+    if (localStorage.getItem('theme') === null) {
+        setTheme(e.matches);
+    }
 });
 
 
