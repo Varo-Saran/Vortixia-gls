@@ -8,12 +8,11 @@
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
 }
 
 @media screen and (max-width: 768px) {
-   /* Fix for horizontal scroll */
-   html, body {
+  /* Fix for horizontal scroll */
+  html, body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
@@ -28,8 +27,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 0px;
     transition: transform 0.3s ease;
+    background: var(--glass-background);
+  }
+
+  body.dark-theme .glassy-nav {
+    background: rgba(10, 14, 23, 0.8);
   }
 
   .glassy-nav .container {
@@ -44,60 +48,37 @@
     position: relative;
   }
 
-  .glassy-section {
-    padding: 60px 0;
-  }
-
-  #about h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  #about p {
-    font-size: 16px;
-    padding: 0 20px;
-  }
-
-  /* Dark mode adjustments */
-  body.dark-theme #about h2,
-  body.dark-theme #about p {
-    color: var(--text-dark);
-  }
-
-  /* Updated: Added blur effect and adjusted styling for mobile nav */
   .nav-links {
     position: fixed;
-    left: -100vw;
-    top: 0px;
-    bottom: 20px;
-    height: 30vh; /* Changed from 370% to 100vh */
+    left: -100%; /* Changed from -250px to -100% */
+    top: 0; /* Changed from 70px to 0 */
     flex-direction: column;
-    width: 90vw; /* Start with 0 width */
-    max-width: 150px; /* Increased from 100px */
+    width: 20%; /* Adjusted width */
+    max-width: 300px; /* Added max-width */
+    height: 50vh; /* Full height */
     text-align: left;
     transition: 0.3s;
-    padding: 55px 20px 5vh 20px;; /* Adjusted padding */
+    padding: 80px 20px 20px; /* Adjusted padding to account for the header */
     overflow-y: auto;
-    z-index: 1000;
-    background-color: rgba(220, 233, 255, 0.838); /* Lighter background */
-    box-shadow: 0 4px 30px rgba(31, 38, 135, 0.421);
-    border-radius: 0 20px 20px 0;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    z-index: 999; /* Ensure it's below the header */
+    background-color: var(--background-light);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   }
 
-  .nav-links::before {
-    content: none;
+  body.dark-theme .nav-links {
+    background-color: var(--background-dark);
+    box-shadow: -2px 0 5px rgba(255, 255, 255, 0.1);
   }
 
   .nav-links.active {
     left: 0;
-    width: 250px;
   }
 
-  body.dark-theme .nav-links {
-    box-shadow: 0 4px 30px rgba(196, 220, 255, 0.238);
-    background-color: rgba(17, 38, 72, 0.926); /* Darker semi-transparent background for dark theme */
+  .nav-links li {
+    margin: 15px 0;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .nav-links.active li {
@@ -105,61 +86,42 @@
     transform: translateX(0);
   }
 
-  .nav-links li {
-    margin: 0.5vh 0; /* Adjust vertical spacing between menu items */
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
   .nav-links li a {
-    font-size: 22px; /* Larger font size for better readability */
+    font-size: 18px;
     color: var(--text-light);
     display: block;
-    padding: 5px 5px; /* Add horizontal padding */
-    border-radius: 0px;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    padding: 5px 0;
   }
 
   body.dark-theme .nav-links li a {
     color: var(--text-dark);
   }
 
-  /* Hide or adjust the nav indicator for mobile */
-  .nav-links .nav-indicator {
-    display: none; /* This will hide the indicator completely on mobile */
-  }
-
   .nav-links li a:hover,
   .nav-links li a:focus {
-    /*background-color: rgba(76, 154, 255, 0.1); /* Light blue background on hover */
     color: var(--primary-color);
-    transform: translateX(5px); /* Slight shift to the right on hover */
   }
 
-  body.dark-theme .nav-links li a:hover,
-  body.dark-theme .nav-links li a:focus {
-    /*background-color: rgba(76, 154, 255, 0.2); /* Slightly darker background for dark theme */
-    color: var(--primary-color); /* Darker highlight for dark theme */
+  .nav-links .nav-indicator {
+    display: none;
   }
-  
 
-  /* Updated: Adjusted theme toggle position */
   .theme-toggle {
-    position: fixed;
-    right: 55px;
-    top: 15px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 1001;
   }
 
-  /* Updated: Adjusted hamburger menu styles */
   .hamburger {
     display: block;
     z-index: 1002;
     cursor: pointer;
-    position: fixed;
-    left: 20px;
-    top: 15px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .hamburger div {
@@ -176,6 +138,7 @@
 
   .hamburger.active .line1 {
     transform: rotate(-45deg) translate(-5px, 6px);
+    background-color: var(--primary-color);
   }
 
   .hamburger.active .line2 {
@@ -184,32 +147,18 @@
 
   .hamburger.active .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
+    background-color: var(--primary-color);
   }
 
-  nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav ul li {
-    margin: 5px 0;
-    top: 2px;
-  }
-
-  /* Adjust logo position */
   .logo {
     position: absolute;
     left: 50%;
-    transform: translateX(-75px);
+    transform: translateX(-50%);
   }
 
   .hero {
-    min-height: calc(100vh - 70px); /* Subtract header height from 100vh */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    min-height: calc(100vh - 70px);
+    padding-top: 70px;
   }
 
   .hero h1 {
@@ -223,18 +172,9 @@
     margin-bottom: 20px;
   }
 
-  main {
-    padding-top: 60px; /* Adjust this value based on your header's height */
-  }
-
   .services-grid,
   .projects-grid {
     grid-template-columns: 1fr;
-    max-width: 100vw;
-    width: 100%;
-    box-sizing: border-box;
-    padding-left: 15px;
-    padding-right: 15px;
     gap: 20px;
   }
 
@@ -246,15 +186,53 @@
     font-size: 28px;
   }
 
-   /* Footer adjustments for mobile */
-   .glassy-footer {
-    padding: 30px 15px; /* Reduce padding and ensure some space on sides */
+  #about h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  #about p {
+    font-size: 16px;
+    padding: 0 20px;
+  }
+
+  .service-card,
+  .project-card {
+    padding: 20px;
+  }
+
+  .project-card {
+    height: auto;
+    min-height: 250px;
+  }
+
+  .project-card-content {
+    min-height: 150px;
+  }
+
+  .project-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .project-card p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .learn-more {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .glassy-footer {
+    padding: 30px 15px;
+    text-align: center;
   }
 
   .footer-content {
     flex-direction: column;
     align-items: center;
-    text-align: center;
   }
 
   .footer-logo {
@@ -266,110 +244,34 @@
     display: none;
   }
 
-  .footer-links li {
-    margin: 5px 0;
-    width: 100%;
-    text-align: center;
-  }
-
   .social-links {
-    display: flex;
     justify-content: center;
     width: 100%;
     margin-top: 20px;
-  }
-
-  .social-icon {
-    margin: 0 10px;
-    font-size: 24px;
-  }
-
-  /* Ensure content doesn't overflow */
-  .container {
-    width: 100%;
-    max-width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-    box-sizing: border-box;
-    overflow-x: hidden;
+    gap: 20px;
   }
 
   .copyright {
     font-size: 14px;
     margin-top: 20px;
   }
-}
 
- /* Improve card layouts */
- .service-card,
- .project-card {
-   padding: 20px;
- }
-
- .project-card {
-  height: auto;
-  min-height: 250px;
- }
-
- .project-card-content {
-  min-height: 150px;
- }
-
-.project-card h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
- }
-
-.project-card p {
-  font-size: 14px;
-  line-height: 1.4;
- }
-
-.learn-more {
-  margin-top: 15px;
-  font-size: 14px;
- }
-
- /* Enhance footer for mobile */
- .glassy-footer {
-   text-align: center;
- }
-
- .social-links {
-   justify-content: space-around;
-   max-width: 200px;
-   margin-bottom: 0;
- }
-
- /* Improve form elements for touch */
- input, 
- textarea, 
- button {
-   font-size: 16px; /* Prevent zoom on focus in iOS */
-   padding: 12px; /* Larger touch targets */
- }
-
- /* Add smooth scrolling for iOS */
- html {
-   -webkit-overflow-scrolling: touch;
- }
-
-
-
-/* Glassy effect enhancement for better visibility */
-@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .glassy-section {
-      background: var(--section-background);
-      backdrop-filter: blur(10px) saturate(180%);
-      -webkit-backdrop-filter: blur(10px) saturate(180%);
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
   }
 
-  body.dark-theme .glassy-section {
-      background: rgba(15, 42, 74, 0.7);
+  input, 
+  textarea, 
+  button {
+    font-size: 16px;
+    padding: 12px;
   }
 }
 
-/* Add styles for larger phones and small tablets */
 @media screen and (min-width: 480px) and (max-width: 768px) {
   .services-grid,
   .projects-grid {
@@ -381,15 +283,6 @@
   }
 }
 
-/* Improve performance of animations on mobile */
-@media screen and (max-width: 768px) {
-  * {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-
-/* Adjust styles for very small screens */
 @media screen and (max-width: 360px) {
   .project-card {
     padding: 15px;
@@ -408,17 +301,28 @@
   }
 }
 
+/* Glassy effect enhancement for better visibility */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .glassy-section {
+    background: var(--section-background);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+  }
 
+  body.dark-theme .glassy-section {
+    background: rgba(10, 14, 23, 0.7);
+  }
+}
 
+/* Improve performance of animations on mobile */
+@media screen and (max-width: 768px) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
-/* Latest changes:
- * 1. Added blur effect to the mobile navigation menu
- * 2. Adjusted the width and height of the mobile menu for full-screen coverage
- * 3. Increased font size of navigation links for better readability
- * 4. Added padding to the top of the mobile menu to accommodate logo/hamburger
- * 6. Providing a slightly different layout for larger phones and small tablets.
- * 7. Added smooth scrolling for iOS devices.
- * 8. Improved performance by disabling animations on mobile devices.
- * 9. Enhanced form elements for better touch interaction.
- 
- */
+/* Add smooth scrolling for iOS */
+html {
+  -webkit-overflow-scrolling: touch;
+}
